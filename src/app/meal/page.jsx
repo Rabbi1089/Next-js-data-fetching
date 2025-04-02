@@ -1,6 +1,12 @@
 import Meal from "@/components/Meal";
 import React from "react";
 
+export const metadata = {
+  title: "Meal || Next Res",
+  description: "Welcome to next res meal",
+};
+
+
 const MealPage = () => {
     
   return (

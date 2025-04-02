@@ -1,5 +1,10 @@
 import React from 'react';
 
+export const metadata = {
+    title: "Welcome",
+    description: "Welcome to next res",
+  };
+
 const welcomePage = () => {
     return (
         <div>
