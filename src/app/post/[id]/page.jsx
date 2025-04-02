@@ -1,10 +1,24 @@
 import React from "react";
 
+
+/*
 export const metadata = {
   title: {
     absolute: "Details",
-  },//absolute is used to ignore default title
+  }, //absolute is used to ignore default title
   description: "Details page",
+};
+
+*/
+
+export const generateMetadata = async ({ params }) => {
+  const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${params.id}`);
+  const data = await res.json();
+  return {
+    title: data.title,
+    description : data.body,
+    keywords: data.body.split(' ')
+  };
 };
 
 const getDetailPost = async (id) => {
