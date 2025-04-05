@@ -15,6 +15,10 @@ const Heading = () => {
       title: "meal",
       path: "/meal",
     },
+    {
+      title: "gallery",
+      path: "/gallery",
+    },
   ];
 
   return (

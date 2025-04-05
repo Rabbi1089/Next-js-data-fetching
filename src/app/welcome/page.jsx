@@ -1,4 +1,10 @@
+import { Bebas_Neue, Bungee_Tint, Poppins, Roboto } from 'next/font/google';
 import React from 'react';
+
+const bebas = Bebas_Neue({
+    weight:['400'], subsets: ['latin']
+})
+
 
 export const metadata = {
     title: "Welcome",
@@ -7,8 +13,8 @@ export const metadata = {
 
 const welcomePage = () => {
     return (
-        <div>
-            hi , I am  welcomePage
+        <div className={`${bebas.className} text-4xl text-blue-700 text-center`}>
+           Hi , Welcome to next meal <br />here you can get your desired meal
         </div>
     );
 };
