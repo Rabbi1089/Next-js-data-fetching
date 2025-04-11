@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import React from "react";
 
 export const metadata = {
@@ -7,10 +8,21 @@ export const metadata = {
 };
 
 const postPage = async () => {
-  const getData = async () => {
-    const res = await fetch("https://jsonplaceholder.typicode.com/posts");
-    const data = res.json();
 
+
+  const getData = async () => {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_Api_Url}/posts`);
+    const data = await res.json();
+
+    /*
+    //redirect example with next
+
+    if (data) {
+      redirect(`/post/${data[0].id}`)
+    }
+
+    */
+    
     return data;
   };
 

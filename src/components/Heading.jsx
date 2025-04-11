@@ -19,6 +19,10 @@ const Heading = () => {
       title: "gallery",
       path: "/gallery",
     },
+    {
+      title: "about",
+      path: "/about",
+    },
   ];
 
   return (
@@ -28,7 +32,7 @@ const Heading = () => {
         <ul>
           {links?.map((link) => (
             <Link key={link.path} href={link.path}>
-              <button className=" bg-yellow-600 gap-2 m-3 border-amber-50 p-3">{link.title} </button>
+              <button className=" bg-yellow-600 gap-2 m-3 border-amber-50 p-3 uppercase">{link.title} </button>
             </Link>
           ))}
         </ul>
