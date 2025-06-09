@@ -1,7 +1,9 @@
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 
-const handler = NextAuth({
+
+export const authOptions = {
+  secret : process.env.NEXT_PUBLIC_Auth_Secrte,
   session: {
     strategy: "jwt",
   },
@@ -44,14 +46,15 @@ const handler = NextAuth({
       }
     }),
   ],
-});
+}
+const handler = NextAuth(authOptions);
 
 const users = [
   {
     id: 1,
     email: "a@example.com",
-    name: "John Doe",
-    password: "password123"
+    name: "Fazla Rabbi",
+    password: " "
   },
   {
     id: 2,
