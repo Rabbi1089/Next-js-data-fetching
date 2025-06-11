@@ -6,7 +6,7 @@ import React from "react";
 const Heading = () => {
   const { data: session, status } = useSession();
 
-  console.log(" session is " , session); // Useful for debugging
+  console.log("session is from heading", session); // Useful for debugging
 
   if (status === "loading") {
     return <p>Loading...</p>;
@@ -36,7 +36,10 @@ const Heading = () => {
   ];
 
   return (
-    <div className=" flex justify-center bg-amber-100 m-3 p-3"><h1 className=" m-5 text-2xl">Welcome, {session?.user?.name || "Guest"}!</h1>
+    <div className=" flex justify-center bg-amber-100 m-3 p-3">
+      <h1 className=" m-5 text-2xl">
+        Welcome, {session?.user?.name || "Guest"}!
+      </h1>
       <nav>
         <ul>
           {links?.map((link) => (
@@ -52,6 +55,16 @@ const Heading = () => {
           ) : (
             <Link href="/api/auth/signin">Sign in</Link>
           )}
+          <>
+            {session?.user?.name ? (
+              <><img height={10} width={50}  src={session.user?.image} alt="{session.user.name}" srcset="" />
+                <p>Welcome, {session.user.name}</p>
+                <p>Type: {session.user.type}</p>
+              </>
+            ) : (
+              <p>Not signed in</p>
+            )}
+          </>
         </ul>
       </nav>
     </div>

@@ -1,11 +1,11 @@
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 
-
 export const authOptions = {
-  secret : process.env.NEXT_PUBLIC_Auth_Secrte,
+  secret: process.env.NEXT_PUBLIC_Auth_Secrte,
   session: {
     strategy: "jwt",
+    maxAge: 30 * 24 * 60 * 60,
   },
 
   providers: [
@@ -31,22 +31,37 @@ export const authOptions = {
         },
       },
 
-      async authorize (credentials) {
-        const {email, password } = credentials;
+      async authorize(credentials) {
+        const { email, password } = credentials;
         if (!credentials) {
-          return null
-        } if (email) {
-          const currentUser = users.find(user => user.email === email)
+          return null;
+        }
+        if (email) {
+          const currentUser = users.find((user) => user.email === email);
           if (currentUser) {
             if (currentUser.password === password) {
-              return currentUser
+              return currentUser;
             }
           }
         }
-      }
+      },
     }),
   ],
-}
+
+  callbacks: {
+    async jwt({ token, user, account }) {
+      if (account) {
+        token.type = user.type;
+      }
+
+      return token;
+    },
+    async session({ session, user, token }) {
+      session.user.type = token.type;
+      return session;
+    },
+  },
+};
 const handler = NextAuth(authOptions);
 
 const users = [
@@ -54,27 +69,35 @@ const users = [
     id: 1,
     email: "a@example.com",
     name: "Fazla Rabbi",
-    password: " "
+    password: " ",
+    type: "admin",
+    image: "https://picsum.photos/200/300",
   },
   {
     id: 2,
     email: "b@example.com",
     name: "Jane Smith",
-    password: "securepass456"
+    password: "securepass456",
+    type: "admin",
+    image: "https://picsum.photos/200/300",
   },
   {
     id: 3,
     email: "mike.jones@example.com",
     name: "Mike Jones",
-    password: "mikepass789"
+    password: "mikepass789",
+    type: "user",
+    image: "https://picsum.photos/200/300",
   },
   {
     id: 4,
     email: "lisa.brown@example.com",
-    name: "Lisa Brown",
-    password: "lisa1234"
-  }
+    name: "lisa",
+    password: "1234",
+    type: "user",
+    image: "https://picsum.photos/200/300",
+  },
 ];
 
-
-export { handler as GET, handler as POST}
+//https://picsum.photos need to add in next config
+export { handler as GET, handler as POST };
