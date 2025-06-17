@@ -1,6 +1,8 @@
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
+import GitHubProvider from "next-auth/providers/github";
+
 export const authOptions = {
   secret: process.env.NEXT_PUBLIC_Auth_Secrte,
   session: {
@@ -48,6 +50,10 @@ export const authOptions = {
     }), GoogleProvider({
     clientId: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
     clientSecret: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_SECRET
+  }),
+  GitHubProvider({
+    clientId: process.env.NEXT_PUBLIC_GITHUB_ID,
+    clientSecret: process.env.NEXT_PUBLIC_GITHUB_SECRET
   })
   ],
 
